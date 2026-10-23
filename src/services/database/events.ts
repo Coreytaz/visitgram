@@ -114,7 +114,7 @@ export async function insertEvent(
         .from(t.visitor_sessions)
         .where(visitKey);
       const isNew =
-        visit && now - visit.last_seen < 1800000
+        event.type !== "pageview" && visit && now - visit.last_seen < 1800000
           ? Boolean(visit.is_new)
           : !known;
       event.visitorStatus = isNew ? "new" : "returning";

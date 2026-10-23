@@ -59,8 +59,16 @@ try {
     assert.ok(concurrent.every((status) => status === 202));
     let rows = await eventsSince(a.id, now);
     assert.equal(rows.length, 6);
-    assert.ok(
-      rows.every((row) => JSON.parse(row.payload).visitorStatus === "new"),
+    assert.equal(
+      rows.filter((row) => JSON.parse(row.payload).visitorStatus === "new")
+        .length,
+      1,
+    );
+    assert.equal(
+      rows.filter(
+        (row) => JSON.parse(row.payload).visitorStatus === "returning",
+      ).length,
+      5,
     );
     assert.equal(
       await insertEvent(

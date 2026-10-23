@@ -64,6 +64,12 @@ test("persistent browser identity, visit labels, unique cohorts and old-event se
     const click = await post(visitor, session, "click");
     assert.equal(click.visitorStatus, "new");
     assert.match(formatTelegramMessage(click, Date.now()), /Новый посетитель/);
+    // Reopening a page in the same tab must recognize the known browser.
+    assert.equal((await post()).visitorStatus, "returning");
+    assert.equal(
+      (await post(visitor, session, "click")).visitorStatus,
+      "returning",
+    );
     const repeat = await post(visitor, randomUUID());
     assert.equal(repeat.visitorStatus, "returning");
     assert.match(

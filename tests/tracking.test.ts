@@ -123,7 +123,7 @@ test("SQLite tracking, access controls, Telegram retry and durable outbox", asyn
     assert.equal(visit.payload.path, "/pricing");
     assert.equal(visit.payload.referrer, "https://search.org");
     assert.equal(visit.payload.site, "example.org");
-    assert.equal(visit.payload.ip, "127.0.0.1");
+    assert.equal(visit.payload.ip, "8.8.8.8");
     assert.equal(visit.payload.browser, "Chrome 130");
     assert.equal(visit.payload.os, "Windows");
     assert.equal(visit.payload.screen, "1920 × 1080");

@@ -1,4 +1,5 @@
 import { isEventType, eventDetails } from "./event-types.js";
+import { clientIp } from "./client-ip.js";
 import { formatNotification } from "./notifications.js";
 export { formatTelegramMessage } from "./notifications.js";
 import type { IncomingMessage, ServerResponse } from "node:http";
@@ -234,7 +235,7 @@ export async function handleTracking(
   }
   const now = Date.now();
   for (const [key, value] of rates) if (value.until < now) rates.delete(key);
-  const key = req.socket.remoteAddress || "unknown";
+  const key = clientIp(req) || "unknown";
   const rate = rates.get(key) || { count: 0, until: now + 60000 };
   rates.set(key, rate);
   if (++rate.count > 120 || rates.size > 10000) {
@@ -322,7 +323,7 @@ export async function handleTracking(
       label: clean(input.label, 120),
       referrer,
       title: clean(input.title, 160),
-      ip: req.socket.remoteAddress?.replace(/^::ffff:/, "") || "",
+      ip: key === "unknown" ? "" : key,
       ...deviceInfo((req.headers["user-agent"] || "").slice(0, 512)),
       language: clean(input.language, 32),
       timezone,
