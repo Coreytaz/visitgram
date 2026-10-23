@@ -1,0 +1,46 @@
+{
+  "name": "visitgram",
+  "version": "0.3.0",
+  "description": "Website analytics delivered to Telegram, with Drizzle ORM database adapters.",
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "start": "tsx --use-env-proxy --env-file=.env.local src/services/server/index.ts",
+    "dev": "tsx watch --use-env-proxy --env-file=.env.local src/services/server/index.ts",
+    "test": "tsx --test tests/*.test.ts",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint . --max-warnings=0",
+    "lint:fix": "eslint . --fix --max-warnings=0",
+    "format": "prettier . --write",
+    "format:check": "prettier . --check",
+    "db:generate": "node --env-file-if-exists=.env.local scripts/db-generate.mjs",
+    "db:migrate": "tsx --use-env-proxy --env-file-if-exists=.env.local scripts/db-migrate.ts"
+  },
+  "dependencies": {
+    "@grammyjs/i18n": "1.1.2",
+    "@grammyjs/router": "2.0.0",
+    "@libsql/client": "0.18.0",
+    "drizzle-orm": "1.0.0-rc.5",
+    "grammy": "1.46.0",
+    "mssql": "11.0.2",
+    "mysql2": "3.24.6",
+    "pg": "8.23.1",
+    "tsx": "4.23.15"
+  },
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "@types/mssql": "9.1.11",
+    "@types/node": "26.6.5",
+    "@types/pg": "8.23.1",
+    "drizzle-kit": "1.0.0-rc.5",
+    "eslint": "10.13.0",
+    "eslint-config-prettier": "10.1.8",
+    "globals": "17.13.0",
+    "prettier": "3.9.10",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.72.0"
+  },
+  "engines": {
+    "node": ">=24.5.0"
+  }
+}

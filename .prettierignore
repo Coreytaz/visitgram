@@ -1,0 +1,9 @@
+node_modules/
+dist/
+coverage/
+drizzle/
+*.db
+*.db-shm
+*.db-wal
+.env
+.env.*

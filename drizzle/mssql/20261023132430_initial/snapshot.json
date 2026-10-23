@@ -1,0 +1,728 @@
+{
+  "version": "2",
+  "dialect": "mssql",
+  "id": "7b792c76-5b42-4e86-90e9-15bdc3d28751",
+  "prevIds": [
+    "00000000-0000-0000-0000-000000000000"
+  ],
+  "ddl": [
+    {
+      "schema": "dbo",
+      "name": "app_migrations",
+      "entityType": "tables"
+    },
+    {
+      "schema": "dbo",
+      "name": "bot_input",
+      "entityType": "tables"
+    },
+    {
+      "schema": "dbo",
+      "name": "bot_preferences",
+      "entityType": "tables"
+    },
+    {
+      "schema": "dbo",
+      "name": "site_event_notifications",
+      "entityType": "tables"
+    },
+    {
+      "schema": "dbo",
+      "name": "site_origins",
+      "entityType": "tables"
+    },
+    {
+      "schema": "dbo",
+      "name": "site_visitors",
+      "entityType": "tables"
+    },
+    {
+      "schema": "dbo",
+      "name": "sites",
+      "entityType": "tables"
+    },
+    {
+      "schema": "dbo",
+      "name": "tracking_events",
+      "entityType": "tables"
+    },
+    {
+      "schema": "dbo",
+      "name": "visitor_sessions",
+      "entityType": "tables"
+    },
+    {
+      "schema": "dbo",
+      "table": "app_migrations",
+      "name": "name",
+      "type": "varchar(100)",
+      "notNull": true,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "dbo",
+      "table": "bot_input",
+      "name": "owner",
+      "type": "varchar(32)",
+      "notNull": true,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "dbo",
+      "table": "bot_input",
+      "name": "state",
+      "type": "nvarchar(max)",
+      "notNull": true,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "dbo",
+      "table": "bot_preferences",
+      "name": "owner",
+      "type": "varchar(32)",
+      "notNull": true,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "dbo",
+      "table": "bot_preferences",
+      "name": "locale",
+      "type": "nvarchar(2)",
+      "notNull": true,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "dbo",
+      "table": "site_event_notifications",
+      "name": "site_id",
+      "type": "varchar(36)",
+      "notNull": true,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "dbo",
+      "table": "site_event_notifications",
+      "name": "event_type",
+      "type": "varchar(32)",
+      "notNull": true,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "dbo",
+      "table": "site_event_notifications",
+      "name": "enabled",
+      "type": "int",
+      "notNull": true,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "dbo",
+      "table": "site_origins",
+      "name": "origin",
+      "type": "varchar(320)",
+      "notNull": true,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "dbo",
+      "table": "site_origins",
+      "name": "site_id",
+      "type": "varchar(36)",
+      "notNull": true,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "dbo",
+      "table": "site_visitors",
+      "name": "site_id",
+      "type": "varchar(36)",
+      "notNull": true,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "dbo",
+      "table": "site_visitors",
+      "name": "visitor_id",
+      "type": "varchar(64)",
+      "notNull": true,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "dbo",
+      "table": "site_visitors",
+      "name": "first_seen",
+      "type": "bigint",
+      "notNull": true,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "dbo",
+      "table": "site_visitors",
+      "name": "last_seen",
+      "type": "bigint",
+      "notNull": true,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "dbo",
+      "table": "sites",
+      "name": "id",
+      "type": "varchar(36)",
+      "notNull": true,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "dbo",
+      "table": "sites",
+      "name": "name",
+      "type": "nvarchar(80)",
+      "notNull": true,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "dbo",
+      "table": "sites",
+      "name": "paused",
+      "type": "int",
+      "notNull": true,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "dbo",
+      "table": "sites",
+      "name": "archived",
+      "type": "int",
+      "notNull": true,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "dbo",
+      "table": "sites",
+      "name": "notify_pageview",
+      "type": "int",
+      "notNull": true,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "dbo",
+      "table": "sites",
+      "name": "notify_click",
+      "type": "int",
+      "notNull": true,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "dbo",
+      "table": "sites",
+      "name": "created_at",
+      "type": "bigint",
+      "notNull": true,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "dbo",
+      "table": "sites",
+      "name": "template_default",
+      "type": "nvarchar(max)",
+      "notNull": false,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "dbo",
+      "table": "sites",
+      "name": "template_pageview",
+      "type": "nvarchar(max)",
+      "notNull": false,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "dbo",
+      "table": "sites",
+      "name": "template_click",
+      "type": "nvarchar(max)",
+      "notNull": false,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "dbo",
+      "table": "tracking_events",
+      "name": "id",
+      "type": "bigint",
+      "notNull": true,
+      "generated": null,
+      "identity": {
+        "seed": 1,
+        "increment": 1
+      },
+      "entityType": "columns"
+    },
+    {
+      "schema": "dbo",
+      "table": "tracking_events",
+      "name": "timestamp",
+      "type": "bigint",
+      "notNull": true,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "dbo",
+      "table": "tracking_events",
+      "name": "payload",
+      "type": "nvarchar(max)",
+      "notNull": true,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "dbo",
+      "table": "tracking_events",
+      "name": "status",
+      "type": "nvarchar(16)",
+      "notNull": true,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "dbo",
+      "table": "tracking_events",
+      "name": "attempts",
+      "type": "int",
+      "notNull": true,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "dbo",
+      "table": "tracking_events",
+      "name": "next_attempt",
+      "type": "bigint",
+      "notNull": true,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "dbo",
+      "table": "tracking_events",
+      "name": "site_id",
+      "type": "varchar(36)",
+      "notNull": false,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "dbo",
+      "table": "tracking_events",
+      "name": "event_type",
+      "type": "nvarchar(16)",
+      "notNull": false,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "dbo",
+      "table": "tracking_events",
+      "name": "event_path",
+      "type": "nvarchar(1024)",
+      "notNull": false,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "dbo",
+      "table": "tracking_events",
+      "name": "visitor_id",
+      "type": "varchar(64)",
+      "notNull": false,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "dbo",
+      "table": "tracking_events",
+      "name": "identity_mode",
+      "type": "nvarchar(16)",
+      "notNull": false,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "dbo",
+      "table": "visitor_sessions",
+      "name": "site_id",
+      "type": "varchar(36)",
+      "notNull": true,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "dbo",
+      "table": "visitor_sessions",
+      "name": "visitor_id",
+      "type": "varchar(64)",
+      "notNull": true,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "dbo",
+      "table": "visitor_sessions",
+      "name": "session_id",
+      "type": "varchar(64)",
+      "notNull": true,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "dbo",
+      "table": "visitor_sessions",
+      "name": "is_new",
+      "type": "int",
+      "notNull": true,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "dbo",
+      "table": "visitor_sessions",
+      "name": "last_seen",
+      "type": "bigint",
+      "notNull": true,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "dbo",
+      "table": "site_event_notifications",
+      "name": "site_event_notifications_pkey",
+      "nameExplicit": false,
+      "columns": [
+        "site_id",
+        "event_type"
+      ],
+      "entityType": "pks"
+    },
+    {
+      "schema": "dbo",
+      "table": "site_visitors",
+      "name": "site_visitors_pkey",
+      "nameExplicit": false,
+      "columns": [
+        "site_id",
+        "visitor_id"
+      ],
+      "entityType": "pks"
+    },
+    {
+      "schema": "dbo",
+      "table": "visitor_sessions",
+      "name": "visitor_sessions_pkey",
+      "nameExplicit": false,
+      "columns": [
+        "site_id",
+        "visitor_id",
+        "session_id"
+      ],
+      "entityType": "pks"
+    },
+    {
+      "schema": "dbo",
+      "table": "app_migrations",
+      "name": "app_migrations_pkey",
+      "nameExplicit": false,
+      "columns": [
+        "name"
+      ],
+      "entityType": "pks"
+    },
+    {
+      "schema": "dbo",
+      "table": "bot_input",
+      "name": "bot_input_pkey",
+      "nameExplicit": false,
+      "columns": [
+        "owner"
+      ],
+      "entityType": "pks"
+    },
+    {
+      "schema": "dbo",
+      "table": "bot_preferences",
+      "name": "bot_preferences_pkey",
+      "nameExplicit": false,
+      "columns": [
+        "owner"
+      ],
+      "entityType": "pks"
+    },
+    {
+      "schema": "dbo",
+      "table": "site_origins",
+      "name": "site_origins_pkey",
+      "nameExplicit": false,
+      "columns": [
+        "origin"
+      ],
+      "entityType": "pks"
+    },
+    {
+      "schema": "dbo",
+      "table": "sites",
+      "name": "sites_pkey",
+      "nameExplicit": false,
+      "columns": [
+        "id"
+      ],
+      "entityType": "pks"
+    },
+    {
+      "schema": "dbo",
+      "table": "tracking_events",
+      "name": "tracking_events_pkey",
+      "nameExplicit": false,
+      "columns": [
+        "id"
+      ],
+      "entityType": "pks"
+    },
+    {
+      "schema": "dbo",
+      "table": "site_event_notifications",
+      "name": "site_event_notifications_site_id_sites_id_fk",
+      "columns": [
+        "site_id"
+      ],
+      "nameExplicit": false,
+      "schemaTo": "dbo",
+      "tableTo": "sites",
+      "columnsTo": [
+        "id"
+      ],
+      "onUpdate": "NO ACTION",
+      "onDelete": "NO ACTION",
+      "entityType": "fks"
+    },
+    {
+      "schema": "dbo",
+      "table": "site_origins",
+      "name": "site_origins_site_id_sites_id_fk",
+      "columns": [
+        "site_id"
+      ],
+      "nameExplicit": false,
+      "schemaTo": "dbo",
+      "tableTo": "sites",
+      "columnsTo": [
+        "id"
+      ],
+      "onUpdate": "NO ACTION",
+      "onDelete": "NO ACTION",
+      "entityType": "fks"
+    },
+    {
+      "schema": "dbo",
+      "table": "site_visitors",
+      "name": "site_visitors_site_id_sites_id_fk",
+      "columns": [
+        "site_id"
+      ],
+      "nameExplicit": false,
+      "schemaTo": "dbo",
+      "tableTo": "sites",
+      "columnsTo": [
+        "id"
+      ],
+      "onUpdate": "NO ACTION",
+      "onDelete": "NO ACTION",
+      "entityType": "fks"
+    },
+    {
+      "schema": "dbo",
+      "table": "tracking_events",
+      "name": "tracking_events_site_id_sites_id_fk",
+      "columns": [
+        "site_id"
+      ],
+      "nameExplicit": false,
+      "schemaTo": "dbo",
+      "tableTo": "sites",
+      "columnsTo": [
+        "id"
+      ],
+      "onUpdate": "NO ACTION",
+      "onDelete": "NO ACTION",
+      "entityType": "fks"
+    },
+    {
+      "schema": "dbo",
+      "table": "visitor_sessions",
+      "name": "visitor_sessions_site_id_sites_id_fk",
+      "columns": [
+        "site_id"
+      ],
+      "nameExplicit": false,
+      "schemaTo": "dbo",
+      "tableTo": "sites",
+      "columnsTo": [
+        "id"
+      ],
+      "onUpdate": "NO ACTION",
+      "onDelete": "NO ACTION",
+      "entityType": "fks"
+    },
+    {
+      "schema": "dbo",
+      "table": "tracking_events",
+      "name": "tracking_delivery",
+      "columns": [
+        {
+          "value": "status",
+          "isExpression": false
+        },
+        {
+          "value": "next_attempt",
+          "isExpression": false
+        }
+      ],
+      "isUnique": false,
+      "where": null,
+      "entityType": "indexes"
+    },
+    {
+      "schema": "dbo",
+      "table": "tracking_events",
+      "name": "tracking_site_time",
+      "columns": [
+        {
+          "value": "site_id",
+          "isExpression": false
+        },
+        {
+          "value": "timestamp",
+          "isExpression": false
+        }
+      ],
+      "isUnique": false,
+      "where": null,
+      "entityType": "indexes"
+    },
+    {
+      "schema": "dbo",
+      "table": "sites",
+      "name": "sites_paused_default",
+      "column": "paused",
+      "nameExplicit": false,
+      "default": "((0))",
+      "entityType": "defaults"
+    },
+    {
+      "schema": "dbo",
+      "table": "sites",
+      "name": "sites_archived_default",
+      "column": "archived",
+      "nameExplicit": false,
+      "default": "((0))",
+      "entityType": "defaults"
+    },
+    {
+      "schema": "dbo",
+      "table": "sites",
+      "name": "sites_notify_pageview_default",
+      "column": "notify_pageview",
+      "nameExplicit": false,
+      "default": "((1))",
+      "entityType": "defaults"
+    },
+    {
+      "schema": "dbo",
+      "table": "sites",
+      "name": "sites_notify_click_default",
+      "column": "notify_click",
+      "nameExplicit": false,
+      "default": "((1))",
+      "entityType": "defaults"
+    },
+    {
+      "schema": "dbo",
+      "table": "tracking_events",
+      "name": "tracking_events_attempts_default",
+      "column": "attempts",
+      "nameExplicit": false,
+      "default": "((0))",
+      "entityType": "defaults"
+    },
+    {
+      "schema": "dbo",
+      "table": "tracking_events",
+      "name": "tracking_events_next_attempt_default",
+      "column": "next_attempt",
+      "nameExplicit": false,
+      "default": "((0))",
+      "entityType": "defaults"
+    }
+  ],
+  "renames": []
+}
