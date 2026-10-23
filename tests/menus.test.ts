@@ -314,6 +314,28 @@ test("owner-only inline menus, input, lifecycle and callback validation", async 
     assert.match(String(lastMessage().payload.text), /Страница 2\/2/);
     await click("archive:0");
     assert.match(String(lastMessage().payload.text), /Архив/);
+    const doomed = await repo.createSite("delete.example");
+    await click(`s:${doomed.id}:card`);
+    assert.ok(
+      lastMessage()
+        .payload.reply_markup.inline_keyboard.flat()
+        .some((b) => b.callback_data === `s:${doomed.id}:delete`),
+    );
+    await click(`s:${doomed.id}:delete`);
+    assert.match(
+      String(lastMessage().payload.text),
+      /без возможности восстановления/,
+    );
+    assert.ok(await repo.getSite(doomed.id));
+    await click(`s:${doomed.id}:card`); // Cancel returns to the intact website.
+    assert.ok(await repo.getSite(doomed.id));
+    await repo.updateSite(doomed.id, { archived: true });
+    await click(`s:${doomed.id}:delete`);
+    await click(`s:${doomed.id}:delete-confirm`);
+    assert.equal(await repo.getSite(doomed.id), undefined);
+    assert.match(String(lastMessage().payload.text), /Архив/);
+    await click(`s:${doomed.id}:delete-confirm`);
+    assert.match(String(lastMessage().payload.text), /больше не существует/);
     for (const call of calls) {
       for (const row of call.payload.reply_markup?.inline_keyboard || []) {
         for (const button of row)

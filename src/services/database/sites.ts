@@ -188,6 +188,33 @@ export async function createSite(text: string) {
   });
   return (await getSite(id))!;
 }
+// Explicit dependent cleanup supports existing schemas without a migration.
+export async function deleteSite(id: string) {
+  await write(async (tx) => {
+    for (const table of [
+      t.tracking_events,
+      t.visitor_sessions,
+      t.site_visitors,
+      t.site_event_notifications,
+      t.site_origins,
+    ])
+      await tx.delete(table).where(eq(table.site_id, id));
+    // Input state is JSON text across all supported dialects.
+    for (const row of await tx.select().from(t.bot_input)) {
+      let state: InputState;
+      try {
+        state = JSON.parse(row.state);
+      } catch {
+        // Malformed input is handled by getInput.
+        continue;
+      }
+      if (state?.siteId === id)
+        await tx.delete(t.bot_input).where(eq(t.bot_input.owner, row.owner));
+    }
+    await tx.delete(t.sites).where(eq(t.sites.id, id));
+  });
+}
+
 export async function updateSite(
   id: string,
   change: {

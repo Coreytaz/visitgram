@@ -7,6 +7,7 @@ import { translatedError } from "./errors.js";
 import { type TelegramContext as Context } from "./i18n.js";
 import { Composer, InlineKeyboard } from "grammy";
 import {
+  deleteSite,
   getSite,
   listSites,
   setInput,
@@ -22,6 +23,8 @@ export async function card(ctx: Context, site: Site) {
   if (site.archived) {
     keyboard
       .text(ctx.t("sites-restore"), `s:${site.id}:restore`)
+      .row()
+      .text(ctx.t("sites-delete"), `s:${site.id}:delete`)
       .row()
       .text(ctx.t("sites-to-archive"), "archive:0");
   } else {
@@ -39,6 +42,8 @@ export async function card(ctx: Context, site: Site) {
       )
       .row()
       .text(ctx.t("sites-archive"), `s:${site.id}:archive`)
+      .row()
+      .text(ctx.t("sites-delete"), `s:${site.id}:delete`)
       .row()
       .text(ctx.t("sites-back"), "list:0");
   }
@@ -92,7 +97,10 @@ async function showList(ctx: Context, archived: boolean, page: number) {
     .text("▶️", `${prefix}:${Math.min(max, page + 1)}`)
     .row()
     .text(ctx.t("sites-add-website"), "add")
-    .text(ctx.t("sites-archive-2"), "archive:0")
+    .text(
+      ctx.t(archived ? "sites-to-list" : "sites-archive-2"),
+      archived ? "list:0" : "archive:0",
+    )
     .text(ctx.t("sites-main-menu"), "home");
   await show(
     ctx,
@@ -150,7 +158,7 @@ async function notifications(ctx: Context, site: Site) {
 
 export const listPattern = /^(list|archive):(\d{1,6})$/;
 export const sitePattern =
-  /^s:([a-f0-9-]{36}):(card|code|edit|name|origins|notify|pause|archive|confirm|restore|n:view|n:click|n:form_start|n:form_success|n:form_abandon|n:scroll_depth|n:active_time|n:block_view|n:contact_click|n:file_download|n:outbound_click|n:video_progress|stats:1|stats:7|stats:30)$/;
+  /^s:([a-f0-9-]{36}):(card|code|edit|name|origins|notify|pause|archive|confirm|restore|delete|delete-confirm|n:view|n:click|n:form_start|n:form_success|n:form_abandon|n:scroll_depth|n:active_time|n:block_view|n:contact_click|n:file_download|n:outbound_click|n:video_progress|stats:1|stats:7|stats:30)$/;
 export function createSites(owner: string) {
   const sites = new Composer<Context>();
   sites.on("callback_query:data", async (ctx) => {
@@ -173,7 +181,10 @@ export function createSites(owner: string) {
         );
         return;
       }
-      if (site.archived && !["card", "restore"].includes(action)) {
+      if (
+        site.archived &&
+        !["card", "restore", "delete", "delete-confirm"].includes(action)
+      ) {
         await card(ctx, site);
         return;
       }
@@ -216,7 +227,19 @@ export function createSites(owner: string) {
         );
       else if (action === "pause")
         await card(ctx, await updateSite(id, { toggle: "paused" }));
-      else if (action === "archive")
+      else if (action === "delete")
+        await show(
+          ctx,
+          ctx.t("sites-delete-confirmation", { value1: html(site.name) }),
+          new InlineKeyboard()
+            .text(ctx.t("sites-yes-delete"), `s:${id}:delete-confirm`)
+            .row()
+            .text(ctx.t("sites-cancel"), `s:${id}:card`),
+        );
+      else if (action === "delete-confirm") {
+        await deleteSite(id);
+        await showList(ctx, site.archived, 0);
+      } else if (action === "archive")
         await show(
           ctx,
           ctx.t("sites-archive-value1-tracking-and-notifications-will", {

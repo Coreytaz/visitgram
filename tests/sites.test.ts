@@ -183,7 +183,54 @@ test("site migration, independent trackers, lifecycle, statistics and persistent
     await repo.setInput("123", { action: "add" });
     await repo.setInput("123");
     assert.equal(await repo.getInput("123"), undefined);
+    await repo.toggleEventNotification(a.id, "form_start");
+    await repo.setInput("delete-input", { action: "name", siteId: a.id });
+    await repo.setInput("keep-input", { action: "name", siteId: b.id });
+    const { db, t, write, eq } = await import("./fixtures.js");
+    await write(async (tx) => {
+      await tx
+        .insert(t.site_visitors)
+        .values({
+          site_id: a.id,
+          visitor_id: "visitor",
+          first_seen: Date.now(),
+          last_seen: Date.now(),
+        });
+      await tx
+        .insert(t.visitor_sessions)
+        .values({
+          site_id: a.id,
+          visitor_id: "visitor",
+          session_id: "session",
+          is_new: 1,
+          last_seen: Date.now(),
+        });
+    });
+    const before = (await eventRows()).filter((row) => row.site_id !== a.id);
+    await repo.updateSite(a.id, { archived: true });
+    await repo.deleteSite(a.id);
+    await repo.deleteSite(a.id); // Repeated deletion is harmless.
+    assert.equal(await repo.getSite(a.id), undefined);
+    assert.equal(await repo.getInput("delete-input"), undefined);
+    assert.equal((await repo.getInput("keep-input"))!.siteId, b.id);
+    assert.deepEqual(await eventRows(), before);
+    for (const table of [
+      t.site_visitors,
+      t.visitor_sessions,
+      t.site_event_notifications,
+      t.site_origins,
+    ])
+      assert.equal(
+        (await db.select().from(table).where(eq(table.site_id, a.id))).length,
+        0,
+      );
+    assert.equal((await post(a.id, "https://new-a.example")).status, 404);
+    const replacement = await repo.createSite("https://new-a.example");
+    assert.notEqual(replacement.id, a.id);
+    await repo.deleteSite(replacement.id);
     await repo.migrateSites();
+    assert.equal(await repo.getSite(a.id), undefined);
+    assert.ok(await repo.getSite(b.id));
     assert.ok((await eventRows()).length);
   } finally {
     stopTracking();

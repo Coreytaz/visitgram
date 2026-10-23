@@ -351,3 +351,9 @@ commands-hint-cancel = Cancel the current action
 sites-notification-settings-hint = Configure each type using the “🔔 Notifications” button below.
 settings-button = ⚙️ Settings
 settings-language = ⚙️ <b>Settings</b>{ "\u000A" }{ "\u000A" }🌐 Choose the bot language. It applies to menus, command hints, and notifications.
+
+sites-delete = 🗑 Delete
+sites-yes-delete = Yes, delete permanently
+sites-delete-confirmation = 🗑 Permanently delete <b>{ $value1 }</b>?{ "\u000A" }{ "\u000A" }Event history, visitors, and website settings will be deleted and cannot be restored. The domains can be added again.
+
+sites-to-list = ⬅️ To websites
