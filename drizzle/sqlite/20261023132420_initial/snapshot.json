@@ -126,7 +126,7 @@
       "table": "site_origins",
       "name": "origin",
       "type": "text",
-      "notNull": false,
+      "notNull": true,
       "autoincrement": false,
       "default": null,
       "generated": null,
@@ -564,6 +564,16 @@
       "entityType": "pks"
     },
     {
+      "table": "site_origins",
+      "name": "site_origins_pk",
+      "columns": [
+        "origin",
+        "site_id"
+      ],
+      "nameExplicit": false,
+      "entityType": "pks"
+    },
+    {
       "table": "site_visitors",
       "name": "site_visitors_pk",
       "columns": [
@@ -607,15 +617,6 @@
       "name": "bot_preferences_pk",
       "columns": [
         "owner"
-      ],
-      "nameExplicit": false,
-      "entityType": "pks"
-    },
-    {
-      "table": "site_origins",
-      "name": "site_origins_pk",
-      "columns": [
-        "origin"
       ],
       "nameExplicit": false,
       "entityType": "pks"

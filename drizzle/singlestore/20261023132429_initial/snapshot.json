@@ -658,7 +658,8 @@
       "table": "site_origins",
       "name": "PRIMARY",
       "columns": [
-        "origin"
+        "origin",
+        "site_id"
       ],
       "entityType": "pks"
     },

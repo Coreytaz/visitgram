@@ -82,7 +82,10 @@ test("site migration, independent trackers, lifecycle, statistics and persistent
       /src="https:\/\/tracker.example\/tracker.js"/,
     );
     assert.ok(repo.trackerSnippet(a.id).includes(`data-site-id="${a.id}"`));
-    await assert.rejects(repo.createSite("a.example"), /уже привязан/);
+    const duplicate = await repo.createSite("a.example");
+    assert.deepEqual(duplicate.origins, ["https://a.example"]);
+    assert.equal(await repo.findLegacySite("https://a.example"), undefined);
+    await repo.deleteSite(duplicate.id);
     assert.throws(() =>
       repo.normalizeOrigins("https://user:pass@example.com/"),
     );
@@ -177,15 +180,15 @@ test("site migration, independent trackers, lifecycle, statistics and persistent
       6,
     );
     assert.equal((await post(a.id, "https://a.example")).status, 404);
-    await assert.rejects(repo.createSite("a.example"), /уже привязан/);
+    const archivedDuplicate = await repo.createSite("a.example");
+    assert.deepEqual(archivedDuplicate.origins, ["https://a.example"]);
+    assert.equal(await repo.findLegacySite("https://a.example"), undefined);
+    await repo.deleteSite(archivedDuplicate.id);
     assert.equal((await repo.listSites(true)).length, 1);
     await repo.updateSite(a.id, { archived: false });
     await repo.updateSite(a.id, { toggle: "paused" });
-    await assert.rejects(
-      repo.updateSite(a.id, { origins: "b.example" }),
-      /другому сайту/,
-    );
-    assert.equal((await repo.getSite(a.id))!.origins.length, 2);
+    await repo.updateSite(a.id, { origins: "b.example" });
+    assert.deepEqual((await repo.getSite(a.id))!.origins, b.origins);
     await repo.updateSite(a.id, { origins: "https://new-a.example" });
     assert.equal((await post(a.id, "https://a.example")).status, 403);
     assert.equal((await post(a.id, "https://new-a.example")).status, 202);

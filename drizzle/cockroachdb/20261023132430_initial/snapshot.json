@@ -729,6 +729,17 @@
     },
     {
       "schema": "public",
+      "table": "site_origins",
+      "name": "site_origins_pkey",
+      "columns": [
+        "origin",
+        "site_id"
+      ],
+      "nameExplicit": false,
+      "entityType": "pks"
+    },
+    {
+      "schema": "public",
       "table": "site_visitors",
       "name": "site_visitors_pkey",
       "columns": [
@@ -776,16 +787,6 @@
       "name": "bot_preferences_pkey",
       "columns": [
         "owner"
-      ],
-      "nameExplicit": false,
-      "entityType": "pks"
-    },
-    {
-      "schema": "public",
-      "table": "site_origins",
-      "name": "site_origins_pkey",
-      "columns": [
-        "origin"
       ],
       "nameExplicit": false,
       "entityType": "pks"

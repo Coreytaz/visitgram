@@ -19,7 +19,7 @@ const tables = {
     enabled: ["int", 0, "required"],
   },
   site_origins: {
-    origin: ["key", 320, "pk"],
+    origin: ["key", 320, "required"],
     site_id: ["key", 36, "required"],
   },
   app_migrations: { name: ["key", 100, "pk"] },
@@ -53,6 +53,7 @@ const tables = {
   },
 };
 const pks = {
+  site_origins: ["origin", "site_id"],
   site_event_notifications: ["site_id", "event_type"],
   site_visitors: ["site_id", "visitor_id"],
   visitor_sessions: ["site_id", "visitor_id", "session_id"],

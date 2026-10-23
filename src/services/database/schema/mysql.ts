@@ -34,12 +34,16 @@ export const site_event_notifications = mysqlTable(
   (t) => [primaryKey({ columns: [t.site_id, t.event_type] })],
 );
 
-export const site_origins = mysqlTable("site_origins", {
-  origin: varchar("origin", { length: 320 }).primaryKey(),
-  site_id: varchar("site_id", { length: 36 })
-    .notNull()
-    .references(() => sites.id),
-});
+export const site_origins = mysqlTable(
+  "site_origins",
+  {
+    origin: varchar("origin", { length: 320 }).notNull(),
+    site_id: varchar("site_id", { length: 36 })
+      .notNull()
+      .references(() => sites.id),
+  },
+  (t) => [primaryKey({ columns: [t.origin, t.site_id] })],
+);
 
 export const app_migrations = mysqlTable("app_migrations", {
   name: varchar("name", { length: 100 }).primaryKey(),

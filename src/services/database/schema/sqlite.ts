@@ -32,12 +32,16 @@ export const site_event_notifications = sqliteTable(
   (t) => [primaryKey({ columns: [t.site_id, t.event_type] })],
 );
 
-export const site_origins = sqliteTable("site_origins", {
-  origin: text("origin").primaryKey(),
-  site_id: text("site_id")
-    .notNull()
-    .references(() => sites.id),
-});
+export const site_origins = sqliteTable(
+  "site_origins",
+  {
+    origin: text("origin").notNull(),
+    site_id: text("site_id")
+      .notNull()
+      .references(() => sites.id),
+  },
+  (t) => [primaryKey({ columns: [t.origin, t.site_id] })],
+);
 
 export const app_migrations = sqliteTable("app_migrations", {
   name: text("name").primaryKey(),

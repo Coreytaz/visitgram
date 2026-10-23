@@ -21,8 +21,9 @@ CREATE TABLE `site_event_notifications` (
 );
 --> statement-breakpoint
 CREATE TABLE `site_origins` (
-	`origin` text PRIMARY KEY,
+	`origin` text NOT NULL,
 	`site_id` text NOT NULL,
+	CONSTRAINT `site_origins_pk` PRIMARY KEY(`origin`, `site_id`),
 	CONSTRAINT `fk_site_origins_site_id_sites_id_fk` FOREIGN KEY (`site_id`) REFERENCES `sites`(`id`)
 );
 --> statement-breakpoint

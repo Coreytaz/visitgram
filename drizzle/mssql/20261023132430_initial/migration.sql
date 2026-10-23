@@ -23,9 +23,9 @@ CREATE TABLE [site_event_notifications] (
 );
 --> statement-breakpoint
 CREATE TABLE [site_origins] (
-	[origin] varchar(320),
+	[origin] varchar(320) NOT NULL,
 	[site_id] varchar(36) NOT NULL,
-	CONSTRAINT [site_origins_pkey] PRIMARY KEY([origin])
+	CONSTRAINT [site_origins_pkey] PRIMARY KEY([origin],[site_id])
 );
 --> statement-breakpoint
 CREATE TABLE [site_visitors] (

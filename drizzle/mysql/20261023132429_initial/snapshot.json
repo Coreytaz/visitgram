@@ -612,6 +612,15 @@
       "entityType": "pks"
     },
     {
+      "table": "site_origins",
+      "name": "PRIMARY",
+      "columns": [
+        "origin",
+        "site_id"
+      ],
+      "entityType": "pks"
+    },
+    {
       "table": "site_visitors",
       "name": "PRIMARY",
       "columns": [
@@ -651,14 +660,6 @@
       "name": "PRIMARY",
       "columns": [
         "owner"
-      ],
-      "entityType": "pks"
-    },
-    {
-      "table": "site_origins",
-      "name": "PRIMARY",
-      "columns": [
-        "origin"
       ],
       "entityType": "pks"
     },

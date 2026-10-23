@@ -467,6 +467,17 @@
     },
     {
       "schema": "dbo",
+      "table": "site_origins",
+      "name": "site_origins_pkey",
+      "nameExplicit": false,
+      "columns": [
+        "origin",
+        "site_id"
+      ],
+      "entityType": "pks"
+    },
+    {
+      "schema": "dbo",
       "table": "site_visitors",
       "name": "site_visitors_pkey",
       "nameExplicit": false,
@@ -515,16 +526,6 @@
       "nameExplicit": false,
       "columns": [
         "owner"
-      ],
-      "entityType": "pks"
-    },
-    {
-      "schema": "dbo",
-      "table": "site_origins",
-      "name": "site_origins_pkey",
-      "nameExplicit": false,
-      "columns": [
-        "origin"
       ],
       "entityType": "pks"
     },

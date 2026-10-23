@@ -22,14 +22,12 @@ try {
     created.push(a.id);
     const b = await sites.createSite(`https://other-${tag}.example`);
     created.push(b.id);
-    await assert.rejects(sites.createSite(a.origins[0]));
-    await assert.rejects(
-      sites.updateSite(a.id, {
-        name: "should rollback",
-        origins: b.origins[0],
-      }),
-    );
-    assert.equal((await sites.getSite(a.id))!.name, a.name);
+    const duplicate = await sites.createSite(a.origins[0]);
+    created.push(duplicate.id);
+    assert.deepEqual(duplicate.origins, a.origins);
+    await sites.updateSite(a.id, { origins: b.origins[0] });
+    assert.deepEqual((await sites.getSite(a.id))!.origins, b.origins);
+    await sites.updateSite(a.id, { origins: a.origins[0] });
     await assert.rejects(
       write(async (tx) => {
         await tx

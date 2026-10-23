@@ -169,17 +169,6 @@ export async function createSite(text: string) {
   const origins = normalizeOrigins(text),
     id = randomUUID();
   await write(async (tx) => {
-    for (const origin of origins) {
-      if (
-        (
-          await tx
-            .select()
-            .from(t.site_origins)
-            .where(eq(t.site_origins.origin, origin))
-        ).length
-      )
-        throw Error("Один из доменов уже привязан к сайту, включая архив.");
-    }
     await tx
       .insert(t.sites)
       .values({ id, name: new URL(origins[0]).host, created_at: Date.now() });
@@ -241,14 +230,6 @@ export async function updateSite(
     }
     if (change.origins !== undefined) {
       const origins = normalizeOrigins(change.origins);
-      for (const origin of origins) {
-        const [existing] = await tx
-          .select()
-          .from(t.site_origins)
-          .where(eq(t.site_origins.origin, origin));
-        if (existing && existing.site_id !== id)
-          throw Error("Один из доменов уже привязан к другому сайту.");
-      }
       await tx.delete(t.site_origins).where(eq(t.site_origins.site_id, id));
       for (const origin of origins)
         await tx.insert(t.site_origins).values({ origin, site_id: id });

@@ -1121,7 +1121,8 @@
       "table": "site_origins",
       "name": "site_origins_pkey",
       "columns": [
-        "origin"
+        "origin",
+        "site_id"
       ],
       "nameExplicit": false,
       "entityType": "pks"
