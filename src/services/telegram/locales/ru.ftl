@@ -68,7 +68,7 @@ sites-websites-value1-page-value2-value3 = Сайтов: { $value1 } · Стра
 
 sites-no-websites-yet = Здесь пока нет сайтов.
 
-sites-tracker-value1-add-this-to-your = 📋 <b>Трекер: { $value1 }</b>{ "\u000A" }{ "\u000A" }Вставьте на страницы своего сайта:{ "\u000A" }<pre>{ $value2 }</pre>{ "\u000A" }Клики по кнопкам и ссылкам отслеживаются автоматически.{ "\u000A" }ID сайта публичный. Административный токен в код вставлять не нужно.
+sites-tracker-value1-add-this-to-your = 📋 <b>Трекер: { $value1 }</b>{ "\u000A" }{ "\u000A" }Вставьте на страницы своего сайта:{ "\u000A" }<pre>{ $value2 }</pre>{ "\u000A" }ID сайта публичный. Административный токен в код вставлять не нужно.
 
 sites-value1-choose-notification-events-disabling-both = <b>{ $value1 }</b>{ "\u000A" }Выберите типы уведомлений. Отключённые события продолжают сохраняться в статистике.
 
