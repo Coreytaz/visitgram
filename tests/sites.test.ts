@@ -86,7 +86,21 @@ test("site migration, independent trackers, lifecycle, statistics and persistent
     assert.throws(() =>
       repo.normalizeOrigins("https://user:pass@example.com/"),
     );
-    assert.throws(() => repo.normalizeOrigins("https://a.example/path"));
+    assert.deepEqual(
+      repo.normalizeOrigins(
+        "https://coreytaz.github.io/pizza,coreytaz.github.io/pizza/menu",
+      ),
+      ["https://coreytaz.github.io"],
+    );
+    assert.deepEqual(repo.normalizeOrigins("http://a.example:8080/path/"), [
+      "http://a.example:8080",
+    ]);
+    assert.throws(() =>
+      repo.normalizeOrigins("https://a.example/path?token=secret"),
+    );
+    assert.throws(() =>
+      repo.normalizeOrigins("https://a.example/path#fragment"),
+    );
     assert.throws(() => repo.normalizeOrigins("https://*.example"));
     assert.throws(() => repo.normalizeOrigins("ftp://example.com"));
     await new Promise<void>((resolve) =>
@@ -188,23 +202,19 @@ test("site migration, independent trackers, lifecycle, statistics and persistent
     await repo.setInput("keep-input", { action: "name", siteId: b.id });
     const { db, t, write, eq } = await import("./fixtures.js");
     await write(async (tx) => {
-      await tx
-        .insert(t.site_visitors)
-        .values({
-          site_id: a.id,
-          visitor_id: "visitor",
-          first_seen: Date.now(),
-          last_seen: Date.now(),
-        });
-      await tx
-        .insert(t.visitor_sessions)
-        .values({
-          site_id: a.id,
-          visitor_id: "visitor",
-          session_id: "session",
-          is_new: 1,
-          last_seen: Date.now(),
-        });
+      await tx.insert(t.site_visitors).values({
+        site_id: a.id,
+        visitor_id: "visitor",
+        first_seen: Date.now(),
+        last_seen: Date.now(),
+      });
+      await tx.insert(t.visitor_sessions).values({
+        site_id: a.id,
+        visitor_id: "visitor",
+        session_id: "session",
+        is_new: 1,
+        last_seen: Date.now(),
+      });
     });
     const before = (await eventRows()).filter((row) => row.site_id !== a.id);
     await repo.updateSite(a.id, { archived: true });

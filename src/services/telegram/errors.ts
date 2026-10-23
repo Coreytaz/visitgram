@@ -34,7 +34,7 @@ const errors: Record<string, string> = {
   "Укажите от 1 до 10 доменов через запятую.":
     "error-send-to-commaseparated-domains",
   "Не удалось распознать домен.": "error-could-not-recognize-the-domain",
-  "Нужен домен с HTTP/HTTPS, без пути, пароля, меток и маски *.":
+  "Нужен адрес с HTTP/HTTPS, без логина, пароля, параметров, меток и маски *.":
     "error-use-an-httphttps-domain-without-a-path",
   "VISITGRAM_PUBLIC_URL должен быть HTTP/HTTPS origin без пути и пароля.":
     "error-visitgrampublicurl-must-be-an-httphttps-origin-without",

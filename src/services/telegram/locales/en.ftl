@@ -16,7 +16,7 @@ input-value1-send-another-value-or-cancel = { $value1 }{ "\u000A" }{ "\u000A" }S
 
 main-menu-website-management = 🌐 <b>Website management</b>
 
-main-menu-add-a-website-send-a-domain = ➕ <b>Add a website</b>{ "\u000A" }{ "\u000A" }Send a domain, such as <code>example.com</code>. For HTTP, include the protocol explicitly. You can send up to 10 comma-separated origins.{ "\u000A" }{ "\u000A" }Time limit: 10 minutes.
+main-menu-add-a-website-send-a-domain = ➕ <b>Add a website</b>{ "\u000A" }{ "\u000A" }Send a domain or page URL, such as <code>example.com</code> or <code>https://example.com/page</code>. Page paths are removed when saving the domain. For HTTP, include the protocol explicitly. You can send up to 10 comma-separated origins.{ "\u000A" }{ "\u000A" }Time limit: 10 minutes.
 
 main-menu-could-not-complete-the-action-please = Could not complete the action. Please try again using /menu.
 
@@ -224,7 +224,7 @@ error-send-to-commaseparated-domains = Send 1 to 10 comma-separated domains.
 
 error-could-not-recognize-the-domain = Could not recognize the domain.
 
-error-use-an-httphttps-domain-without-a-path = Use an HTTP/HTTPS domain without a path, password, query, fragment, or * wildcard.
+error-use-an-httphttps-domain-without-a-path = Use an HTTP/HTTPS address without credentials, query, fragment, or * wildcard.
 
 error-visitgrampublicurl-must-be-an-httphttps-origin-without = VISITGRAM_PUBLIC_URL must be an HTTP/HTTPS origin without a path or password.
 

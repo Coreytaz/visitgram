@@ -16,7 +16,7 @@ input-value1-send-another-value-or-cancel = { $value1 }{ "\u000A" }{ "\u000A" }�
 
 main-menu-website-management = 🌐 <b>Управление сайтами</b>
 
-main-menu-add-a-website-send-a-domain = ➕ <b>Добавление сайта</b>{ "\u000A" }{ "\u000A" }Отправьте домен, например <code>example.com</code>. Для HTTP укажите протокол явно. Можно отправить до 10 origin через запятую.{ "\u000A" }{ "\u000A" }Ожидание: 10 минут.
+main-menu-add-a-website-send-a-domain = ➕ <b>Добавление сайта</b>{ "\u000A" }{ "\u000A" }Отправьте домен или ссылку на страницу, например <code>example.com</code> или <code>https://example.com/page</code>. При сохранении домена путь страницы убирается. Для HTTP укажите протокол явно. Можно отправить до 10 origin через запятую.{ "\u000A" }{ "\u000A" }Ожидание: 10 минут.
 
 main-menu-could-not-complete-the-action-please = Не удалось выполнить действие. Попробуйте ещё раз через /menu.
 
@@ -224,7 +224,7 @@ error-send-to-commaseparated-domains = Укажите от 1 до 10 домен�
 
 error-could-not-recognize-the-domain = Не удалось распознать домен.
 
-error-use-an-httphttps-domain-without-a-path = Нужен домен с HTTP/HTTPS, без пути, пароля, меток и маски *.
+error-use-an-httphttps-domain-without-a-path = Нужен адрес с HTTP/HTTPS, без логина, пароля, параметров, меток и маски *.
 
 error-visitgrampublicurl-must-be-an-httphttps-origin-without = VISITGRAM_PUBLIC_URL должен быть HTTP/HTTPS origin без пути и пароля.
 

@@ -149,12 +149,13 @@ test("owner-only inline menus, input, lifecycle and callback validation", async 
       ackBefore + 1,
     );
     assert.equal((await repo.getInput("123"))!.action, "add");
-    await text("https://menu.example/path");
+    await text("https://menu.example/path?token=secret");
     assert.equal((await repo.listSites()).length, 0);
     assert.ok(await repo.getInput("123"));
-    await text("menu.example");
+    await text("https://menu.example/path");
     const site = (await repo.listSites())[0];
     assert.ok(site);
+    assert.deepEqual(site.origins, ["https://menu.example"]);
     assert.ok(String(lastMessage().payload.text).includes("data-site-id="));
     assert.equal(await repo.getInput("123"), undefined);
     await click(`s:${site.id}:name`);
