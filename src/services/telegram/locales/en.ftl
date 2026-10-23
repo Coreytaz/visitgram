@@ -68,7 +68,7 @@ sites-websites-value1-page-value2-value3 = Websites: { $value1 } · Page { $valu
 
 sites-no-websites-yet = No websites yet.
 
-sites-tracker-value1-add-this-to-your = 📋 <b>Tracker: { $value1 }</b>{ "\u000A" }{ "\u000A" }Add this to your website pages:{ "\u000A" }<pre>{ $value2 }</pre>{ "\u000A" }Button and link clicks are tracked automatically. Optionally add data-analog-event to set a custom event name.{ "\u000A" }The website ID is public. Do not include the admin token in the code.
+sites-tracker-value1-add-this-to-your = 📋 <b>Tracker: { $value1 }</b>{ "\u000A" }{ "\u000A" }Add this to your website pages:{ "\u000A" }<pre>{ $value2 }</pre>{ "\u000A" }Button and link clicks are tracked automatically.{ "\u000A" }The website ID is public. Do not include the admin token in the code.
 
 sites-value1-choose-notification-events-disabling-both = <b>{ $value1 }</b>{ "\u000A" }Choose notification types. Disabled notifications are still recorded in statistics.
 
